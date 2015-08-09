@@ -1,0 +1,20 @@
+production:
+  sessions:
+    default:
+      database: mongo
+      hosts:
+        - localhost:27017
+
+development:
+  sessions:
+    default:
+      database: mongo
+      hosts:
+        - localhost:27017
+
+test:
+  sessions:
+    default:
+      database: mongo_test
+      hosts:
+        - localhost:27017
