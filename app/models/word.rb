@@ -25,15 +25,40 @@ class Word
   		second_word_arr = Word.where(length: 8-determinant).to_a
 
   		words_rand = Random.new
-			index1 = words_rand.rand(0..first_word_arr.length-1)
-			index2 = words_rand.rand(0..second_word_arr.length-1)
-			finalizer(first_word_arr, second_word_arr, index1, index2)
+
+  		if determinant == 8 && 8-determinant == 0
+  			eight_letter_word(words_rand, first_word_arr, second_word_arr)
+  		else
+  			btwn_seven_and_two(words_rand, first_word_arr, second_word_arr)
+  		end
 
   	end
 
+  	def btwn_seven_and_two(words_rand, words1, words2)
+			index1 = words_rand.rand(0..words1.length-1)
+			index2 = words_rand.rand(0..words2.length-1)
+			finalizer(words1, words2, index1, index2)
+  	end
+
+  	def eight_letter_word(words_rand, words1, words2)
+  		if words1.length == 0
+  			index1 = words_rand.rand(0..words1.length)
+				index2 = words_rand.rand(0..words2.length-1)
+			else
+				index1 = words_rand.rand(0..words1.length-1)
+				index2 = words_rand.rand(0..words2.length)
+			end
+			finalizer(words1, words2, index1, index2)
+  	end
+
 	  def finalizer(words1, words2, index1, index2)
-	  	final_word = words1[index1].word + words2[index2].word
-	  	final_word
+	  	if words1[index1] == nil 
+	  		final_word = "" + words2[index2].word
+	  	elsif words2[index2] == nil
+	  		final_word = words1[index2].word + ""
+	  	else
+	  		final_word = words1[index1].word + words2[index2].word
+	  	end
 	  end
 
 	end
